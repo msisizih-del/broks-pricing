@@ -216,7 +216,7 @@ if(b)b.style.display='block';
 <div class="divider"></div>
 <div class="stitle" data-t="compare">Сравни способы оплаты</div>
 
-<div class="compare-grid" style="display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:16px;margin-bottom:80px;align-items:start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x;overscroll-behavior:contain">
+<div class="compare-grid" style="display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:16px;margin-bottom:80px;align-items:start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
 
 <div class="paycard" id="card-cr">
 <div id="hdr-cr" style="cursor:pointer">
@@ -483,28 +483,12 @@ if(b)b.style.display='block';
   });
 
 
-// Блокируем вертикальный свайп на карточках сравнения чтобы Mini App не сворачивался
-var cg=document.querySelector('.compare-grid');
-if(cg){
-  cg.addEventListener('touchmove',function(e){
-    if(Math.abs(e.touches[0].clientX)>0){
-      e.stopPropagation();
-    }
-  },{passive:false});
-  // Также блокируем на самих paycard
-  var pcs=document.querySelectorAll('.paycard');
-  for(var i=0;i<pcs.length;i++){
-    pcs[i].style.touchAction='pan-x';
-    pcs[i].addEventListener('touchmove',function(e){
-      e.stopPropagation();
-    },{passive:false});
-  }
-}
-
-// Telegram WebApp - expand на весь экран
+// Telegram WebApp
 if(window.Telegram && window.Telegram.WebApp){
-  window.Telegram.WebApp.expand();
-  window.Telegram.WebApp.ready();
+  var tg=window.Telegram.WebApp;
+  tg.expand();
+  tg.ready();
+  tg.disableVerticalSwipes();
 }
 })();
 </script>
