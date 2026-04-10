@@ -97,24 +97,52 @@ h1{font-size:36px}
 .container{padding:0 16px}
 .topbar{padding:12px 16px}
 .topbar select{font-size:11px;padding:6px 10px}
-.paycard{padding:24px 20px}
+.paycard{padding:16px 14px}.paycard div[style*="font-weight:600"]{font-size:13px!important}.paycard div[style*="font-size:13px"]{font-size:11px!important}
 .cat-toggle{padding:10px 0}
-.card{padding:20px 18px!important;border-radius:18px!important}
-.c-name{margin-bottom:8px!important;margin-top:4px!important;font-size:13px!important}
+.card{padding:16px 14px!important;border-radius:16px!important}
+.c-name{margin-bottom:4px!important;margin-top:2px!important;font-size:12px!important}
 .c-price .num{font-size:32px!important}
 .c-price .cur{font-size:14px!important}
-.c-price{margin-bottom:4px!important}
-.c-desc{margin-bottom:14px!important;font-size:12px!important}
-.feats{margin-bottom:16px!important}
-.feats li{padding:6px 0!important;font-size:12px!important}
+.c-price{margin-bottom:2px!important}
+.c-desc{margin-bottom:10px!important;font-size:11px!important}
+.feats{margin-bottom:12px!important}
+.feats li{padding:4px 0!important;font-size:11px!important}
 .ic{width:16px!important;height:16px!important;border-radius:6px!important}
-.btn{padding:12px!important;font-size:13px!important;border-radius:12px!important}
+.btn{padding:10px!important;font-size:12px!important;border-radius:10px!important}
 .star-badge{font-size:9px!important;padding:4px 14px!important}
-.grid{gap:12px!important;margin-bottom:48px!important}
+.grid{gap:10px!important;margin-bottom:40px!important}
 }
+
+.desktop-banner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:linear-gradient(135deg,var(--v),#6d28d9);padding:14px 24px;text-align:center;font-size:14px;font-weight:600;color:#fff;backdrop-filter:blur(12px);box-shadow:0 -4px 20px rgba(0,0,0,0.3)}
+.desktop-banner a{color:#fff;text-decoration:underline;margin-left:8px}
+@media(min-width:769px){.tg-only{display:none}}
+
+.open-full{display:none;text-align:center;margin:0 0 24px}
+.open-full a{display:inline-flex;align-items:center;gap:6px;font-family:var(--font);font-size:12px;font-weight:500;color:var(--v2);padding:8px 18px;border:1px solid rgba(139,92,246,0.3);border-radius:20px;text-decoration:none;transition:all 0.3s;background:rgba(139,92,246,0.06)}
+.open-full a:hover{border-color:var(--v);background:rgba(139,92,246,0.12)}
+@media(max-width:768px){.open-full{display:block}}
 </style>
 </head>
 <body>
+<div class="desktop-banner" id="deskBanner">
+📱 Для лучшего вида <a href="https://broks-pricing.vercel.app/pricing-v4.html" target="_blank">откройте в браузере ↗</a>
+</div>
+<script>
+// Определяем Telegram WebApp на десктопе
+if(window.Telegram && window.Telegram.WebApp){
+var tg=window.Telegram.WebApp;
+tg.expand();
+tg.ready();
+// На десктопе Telegram WebApp маленький - показываем баннер
+if(window.innerWidth<500 && window.innerHeight<900){
+// Мобильный Telegram - всё ок
+}else{
+// Десктоп Telegram - показываем баннер
+var b=document.getElementById('deskBanner');
+if(b)b.style.display='block';
+}
+}
+</script>
 <div class="bg-mesh"></div>
 <div class="noise"></div>
 <div class="wrap">
@@ -145,6 +173,7 @@ h1{font-size:36px}
 <p class="sub"><span data-t="sub">Три типа тарифов. Три способа оплаты. Начни бесплатно — масштабируй когда готов</span></p>
 </header>
 <div class="container">
+<div class="open-full"><a href="https://broks-pricing.vercel.app/pricing-v4.html" target="_blank">🖥 Открыть полную версию сайта ↗</a></div>
 
 <div style="display:flex;flex-direction:column;align-items:center;margin:56px auto 48px;gap:16px">
 <div class="tabs" id="T" style="margin:0">
@@ -180,7 +209,7 @@ h1{font-size:36px}
 <div class="divider"></div>
 <div class="stitle" data-t="compare">Сравни способы оплаты</div>
 
-<div class="compare-grid" style="display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:16px;margin-bottom:80px;align-items:start;overflow-x:auto;-webkit-overflow-scrolling:touch">
+<div class="compare-grid" style="display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:16px;margin-bottom:80px;align-items:start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none">
 
 <div class="paycard" id="card-cr">
 <div id="hdr-cr" style="cursor:pointer">
