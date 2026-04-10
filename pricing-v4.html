@@ -491,26 +491,7 @@ if(window.Telegram && window.Telegram.WebApp){
   try{tg.disableVerticalSwipes();}catch(e){}
   try{tg.enableClosingConfirmation();}catch(e){}
 }
-// Умный touch: блокируем сворачивание только при горизонтальном свайпе на карточках
-var cg=document.querySelector('.compare-grid');
-if(cg){
-  var startX=0,startY=0,isHoriz=null;
-  cg.addEventListener('touchstart',function(e){
-    startX=e.touches[0].pageX;
-    startY=e.touches[0].pageY;
-    isHoriz=null;
-  },{passive:true});
-  cg.addEventListener('touchmove',function(e){
-    var dx=Math.abs(e.touches[0].pageX-startX);
-    var dy=Math.abs(e.touches[0].pageY-startY);
-    if(isHoriz===null && (dx>5 || dy>5)){
-      isHoriz=dx>dy;
-    }
-    if(isHoriz){
-      e.preventDefault();
-    }
-  },{passive:false});
-}
+
 })();
 </script>
 </body>
