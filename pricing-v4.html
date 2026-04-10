@@ -493,6 +493,63 @@ if(window.Telegram && window.Telegram.WebApp){
   
 }
 
+
+// Оплата через API — создаём инвойс CryptoBot прямо в Mini App
+var API_URL='https://159.194.209.50:8080';
+// Получаем user_id из Telegram WebApp
+var tgUser=0;
+if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initDataUnsafe&&window.Telegram.WebApp.initDataUnsafe.user){
+  tgUser=window.Telegram.WebApp.initDataUnsafe.user.id;
+}
+
+// Перехватываем клики на кнопки "Купить"/"Подключить"
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a.btn');
+  if(!a)return;
+  var href=a.getAttribute('href')||'';
+  if(href.indexOf('start=pay_')<0)return;
+  
+  // Только для CryptoBot
+  if(currentPay!=='crypto')return;
+  
+  e.preventDefault();
+  
+  // Достаём tariff_id из ссылки
+  var m=href.match(/start=pay_(.+)/);
+  if(!m)return;
+  var tid=m[1];
+  
+  // Показываем загрузку
+  a.textContent='Создаю счёт...';
+  a.style.opacity='0.6';
+  a.style.pointerEvents='none';
+  
+  // Вызываем API
+  fetch('https://159.194.209.50:8080/create-invoice?tariff_id='+tid+'&user_id='+tgUser,{method:'POST'})
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d.ok&&d.pay_url){
+        // Открываем ссылку оплаты
+        if(window.Telegram&&window.Telegram.WebApp){
+          window.Telegram.WebApp.openTelegramLink(d.pay_url);
+        }else{
+          window.open(d.pay_url,'_blank');
+        }
+      }else{
+        alert('Ошибка создания счёта');
+      }
+    })
+    .catch(function(){
+      // Fallback — открываем бота
+      window.open(href,'_blank');
+    })
+    .finally(function(){
+      a.textContent=a.closest('#p,#s,#u').id==='p'?'Купить':'Подключить';
+      a.style.opacity='1';
+      a.style.pointerEvents='auto';
+    });
+});
+
 })();
 </script>
 </body>
