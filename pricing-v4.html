@@ -483,12 +483,36 @@ if(b)b.style.display='block';
   });
 
 
-// Telegram WebApp
+// Telegram WebApp - полная блокировка сворачивания
 if(window.Telegram && window.Telegram.WebApp){
   var tg=window.Telegram.WebApp;
   tg.expand();
   tg.ready();
-  tg.disableVerticalSwipes();
+  try{tg.disableVerticalSwipes();}catch(e){}
+  try{tg.enableClosingConfirmation();}catch(e){}
+}
+// Блокируем pull-to-refresh и swipe-to-close на всей странице
+document.addEventListener('touchmove',function(e){
+  var t=e.target;
+  while(t&&t!==document.body){
+    if(t.classList&&(t.classList.contains('compare-grid')||t.classList.contains('paycard'))){
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    t=t.parentElement;
+  }
+},{passive:false});
+// Горизонтальный скролл карточек сравнения вручную
+var cg=document.querySelector('.compare-grid');
+if(cg){
+  var startX=0,scrollL=0;
+  cg.addEventListener('touchstart',function(e){startX=e.touches[0].pageX;scrollL=cg.scrollLeft;});
+  cg.addEventListener('touchmove',function(e){
+    var dx=e.touches[0].pageX-startX;
+    cg.scrollLeft=scrollL-dx;
+    e.preventDefault();
+  },{passive:false});
 }
 })();
 </script>
