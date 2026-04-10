@@ -494,7 +494,7 @@ if(window.Telegram && window.Telegram.WebApp){
 }
 
 
-// Кнопки "Купить" — открываем через Telegram deep link
+// Кнопки "Купить" — закрываем Mini App и открываем deep link
 document.addEventListener('click',function(e){
   var a=e.target.closest('a.btn');
   if(!a)return;
@@ -503,6 +503,7 @@ document.addEventListener('click',function(e){
   e.preventDefault();
   if(window.Telegram&&window.Telegram.WebApp){
     window.Telegram.WebApp.openTelegramLink(href);
+    setTimeout(function(){window.Telegram.WebApp.close();},500);
   }else{
     window.open(href,'_blank');
   }
