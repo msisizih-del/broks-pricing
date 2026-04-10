@@ -298,6 +298,7 @@ if(b)b.style.display='block';
 <footer><a href="https://t.me/NBroks_bot" data-t="footer">Broks AI</a> — AI-ассистент нового поколения<br><span style="display:inline-block;margin-top:10px;opacity:0.5">@NBroks_bot</span></footer>
 </div>
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
 (function(){
   // State
@@ -489,7 +490,7 @@ if(window.Telegram && window.Telegram.WebApp){
   tg.expand();
   tg.ready();
   try{tg.disableVerticalSwipes();}catch(e){}
-  try{tg.enableClosingConfirmation();}catch(e){}
+  
 }
 
 })();
