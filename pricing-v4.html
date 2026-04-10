@@ -507,6 +507,51 @@ if(window.Telegram && window.Telegram.WebApp){
 }
 
 
+
+// Оплата CryptoBot прямо внутри Mini App через web_app_invoice_url
+var API='https://things-therapeutic-adware-respective.trycloudflare.com';
+var tgUser=0;
+if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initDataUnsafe&&window.Telegram.WebApp.initDataUnsafe.user){
+  tgUser=window.Telegram.WebApp.initDataUnsafe.user.id;
+}
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a.btn');
+  if(!a)return;
+  var href=a.getAttribute('href')||'';
+  if(href.indexOf('start=pay_')<0)return;
+  e.preventDefault();
+  // Только CryptoBot через API
+  if(currentPay!=='crypto'){
+    window.location.href=href;
+    return;
+  }
+  var m=href.match(/start=pay_(.+)/);
+  if(!m)return;
+  var tid=m[1];
+  var oldText=a.textContent;
+  a.textContent='Создаю счёт...';
+  a.style.opacity='0.6';
+  a.style.pointerEvents='none';
+  fetch(API+'/create-invoice?tariff_id='+tid+'&user_id='+tgUser,{method:'POST'})
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d.ok&&d.web_app_url){
+        // Перенаправляем на страницу оплаты CryptoBot прямо в Mini App
+        window.location.href=d.web_app_url;
+      }else{
+        window.location.href=href;
+      }
+    })
+    .catch(function(){
+      window.location.href=href;
+    })
+    .finally(function(){
+      a.textContent=oldText;
+      a.style.opacity='1';
+      a.style.pointerEvents='auto';
+    });
+});
+
 })();
 </script>
 
