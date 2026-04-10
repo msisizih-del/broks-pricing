@@ -491,27 +491,24 @@ if(window.Telegram && window.Telegram.WebApp){
   try{tg.disableVerticalSwipes();}catch(e){}
   try{tg.enableClosingConfirmation();}catch(e){}
 }
-// Блокируем pull-to-refresh и swipe-to-close на всей странице
-document.addEventListener('touchmove',function(e){
-  var t=e.target;
-  while(t&&t!==document.body){
-    if(t.classList&&(t.classList.contains('compare-grid')||t.classList.contains('paycard'))){
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    t=t.parentElement;
-  }
-},{passive:false});
-// Горизонтальный скролл карточек сравнения вручную
+// Умный touch: блокируем сворачивание только при горизонтальном свайпе на карточках
 var cg=document.querySelector('.compare-grid');
 if(cg){
-  var startX=0,scrollL=0;
-  cg.addEventListener('touchstart',function(e){startX=e.touches[0].pageX;scrollL=cg.scrollLeft;});
+  var startX=0,startY=0,isHoriz=null;
+  cg.addEventListener('touchstart',function(e){
+    startX=e.touches[0].pageX;
+    startY=e.touches[0].pageY;
+    isHoriz=null;
+  },{passive:true});
   cg.addEventListener('touchmove',function(e){
-    var dx=e.touches[0].pageX-startX;
-    cg.scrollLeft=scrollL-dx;
-    e.preventDefault();
+    var dx=Math.abs(e.touches[0].pageX-startX);
+    var dy=Math.abs(e.touches[0].pageY-startY);
+    if(isHoriz===null && (dx>5 || dy>5)){
+      isHoriz=dx>dy;
+    }
+    if(isHoriz){
+      e.preventDefault();
+    }
   },{passive:false});
 }
 })();
