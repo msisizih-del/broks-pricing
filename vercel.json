@@ -1,0 +1,5 @@
+{
+    "rewrites": [
+          { "source": "/", "destination": "/pricing-v4.html" }
+    ]
+}
