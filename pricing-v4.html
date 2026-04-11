@@ -84,11 +84,55 @@ h1 .grad{background:linear-gradient(135deg,#fff 20%,var(--v2) 50%,var(--em) 80%)
 footer{text-align:center;padding:48px 24px 80px;color:var(--dim);font-size:13px}
 footer a{color:var(--v2);text-decoration:none;font-weight:500}
 footer a:hover{text-decoration:underline}
+
+/* ========== CRYPTO PAY MODAL ========== */
+.pay-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px}
+.pay-overlay.active{display:flex}
+.pay-modal{background:var(--bg);border:1px solid var(--border);border-radius:24px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn 0.3s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.pm-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:none;color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.2s}
+.pm-close:hover{background:rgba(255,255,255,0.12);color:var(--text)}
+.pm-body{padding:28px 24px}
+.pm-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.pm-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
+.pm-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;font-weight:600}
+.coin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.coin-btn{padding:10px 4px;border:1px solid var(--border);border-radius:12px;background:transparent;color:var(--muted);font-family:var(--mono);font-size:11px;font-weight:500;cursor:pointer;transition:0.2s;text-transform:uppercase;text-align:center}
+.coin-btn:hover{border-color:var(--em);color:var(--text)}
+.coin-btn.coin-on{border-color:var(--em);background:rgba(16,185,129,0.12);color:var(--em)}
+.pay-info{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:16px;padding:20px;margin-bottom:20px}
+.pay-info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+.pay-info-row:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.04)}
+.pay-info-label{font-size:12px;color:var(--muted)}
+.pay-info-val{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--text)}
+.pay-addr-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:16px;position:relative}
+.pay-addr{font-family:var(--mono);font-size:12px;word-break:break-all;color:var(--text);line-height:1.6;padding-right:40px}
+.copy-btn{position:absolute;top:50%;right:12px;transform:translateY(-50%);background:rgba(16,185,129,0.15);border:none;color:var(--em);padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;transition:0.2s}
+.copy-btn:hover{background:rgba(16,185,129,0.3)}
+.copy-btn.copied{background:rgba(16,185,129,0.3);color:#fff}
+.qr-box{text-align:center;margin:16px 0}
+.qr-box img{border-radius:12px;background:#fff;padding:8px;max-width:180px}
+.status-box{text-align:center;padding:20px;border-radius:16px;margin-bottom:16px}
+.status-waiting{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2)}
+.status-confirming{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2)}
+.status-done{background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3)}
+.status-icon{font-size:32px;margin-bottom:8px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.pulsing{animation:pulse 1.5s infinite}
+.status-text{font-size:14px;font-weight:600}
+.status-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.pm-action-btn{display:block;width:100%;padding:14px;border-radius:14px;font-family:var(--font);font-size:14px;font-weight:600;border:none;cursor:pointer;transition:0.3s;margin-top:12px}
+.pm-action-btn.primary{background:linear-gradient(135deg,var(--em),#059669);color:#fff;box-shadow:0 4px 20px rgba(16,185,129,0.25)}
+.pm-action-btn.primary:hover{box-shadow:0 6px 28px rgba(16,185,129,0.35)}
+.pm-action-btn.secondary{background:rgba(255,255,255,0.06);color:var(--muted)}
+.pm-action-btn:disabled{opacity:0.5;cursor:not-allowed}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 @media(max-width:768px){.grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}header{padding:72px 20px 24px}h1{letter-spacing:-1.5px}.tabs button{padding:10px 18px;font-size:13px}.pay-tabs button{font-size:11px;padding:6px 12px}.pay-grid{grid-template-columns:1fr!important;max-width:400px;margin-left:auto;margin-right:auto}}
 
 @media(max-width:768px){
 .grid{grid-template-columns:1fr!important;gap:16px}
-
 .tabs button{padding:9px 16px;font-size:13px}
 .pay-tabs button{padding:6px 12px;font-size:11px}
 header{padding:80px 16px 24px}
@@ -118,6 +162,9 @@ h1{font-size:36px}
 .btn{padding:10px!important;font-size:12px!important;border-radius:10px!important}
 .star-badge{font-size:9px!important;padding:4px 14px!important}
 .grid{gap:10px!important;margin-bottom:40px!important}
+.coin-grid{grid-template-columns:repeat(3,1fr)}
+.pm-body{padding:20px 16px}
+.pay-modal{border-radius:20px}
 }
 
 .desktop-banner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:linear-gradient(135deg,var(--v),#6d28d9);padding:14px 24px;text-align:center;font-size:14px;font-weight:600;color:#fff;backdrop-filter:blur(12px);box-shadow:0 -4px 20px rgba(0,0,0,0.3)}
@@ -125,22 +172,7 @@ h1{font-size:36px}
 @media(min-width:769px){.tg-only{display:none}}
 
 .open-full-link{display:none;font-size:11px;font-weight:600;text-decoration:none;padding:6px 12px;border:1px solid rgba(139,92,246,0.4);border-radius:14px;transition:all 0.3s;color:var(--v2);background:rgba(139,92,246,0.1);margin-right:auto;white-space:nowrap}
-
-
 @media(max-width:768px){.open-full-link{display:block}}
-
-
-
-
-@keyframes pop{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
-
-
-
-
-
-
-
-
 </style>
 </head>
 <body>
@@ -148,19 +180,9 @@ h1{font-size:36px}
 📱 Для лучшего вида <a href="https://broks-pricing.vercel.app/pricing-v4.html" target="_blank">откройте в браузере ↗</a>
 </div>
 <script>
-// Определяем Telegram WebApp на десктопе
 if(window.Telegram && window.Telegram.WebApp){
-var tg=window.Telegram.WebApp;
-tg.expand();
-tg.ready();
-// На десктопе Telegram WebApp маленький - показываем баннер
-if(window.innerWidth<500 && window.innerHeight<900){
-// Мобильный Telegram - всё ок
-}else{
-// Десктоп Telegram - показываем баннер
-var b=document.getElementById('deskBanner');
-if(b)b.style.display='block';
-}
+var tg=window.Telegram.WebApp;tg.expand();tg.ready();
+if(window.innerWidth<500 && window.innerHeight<900){}else{var b=document.getElementById('deskBanner');if(b)b.style.display='block';}
 }
 </script>
 <div class="bg-mesh"></div>
@@ -194,7 +216,6 @@ if(b)b.style.display='block';
 </header>
 <div class="container">
 
-
 <div style="display:flex;flex-direction:column;align-items:center;margin:56px auto 48px;gap:16px">
 <div class="tabs" id="T" style="margin:0">
 <button class="on" data-t="p"><span data-t="tab-pkg">Пакеты</span></button>
@@ -202,28 +223,28 @@ if(b)b.style.display='block';
 <button data-t="u"><span data-t="tab-unl">Безлимит</span></button>
 </div>
 <div class="pay-tabs" id="P" style="margin:0">
-<button class="pay-on" data-p="crypto" style="color:var(--em)"><span class="dot" style="background:var(--em)"></span>CryptoBot</button>
+<button class="pay-on" data-p="crypto" style="color:var(--em)"><span class="dot" style="background:var(--em)"></span><span data-t="pay-crypto">Крипто 350+</span></button>
 <button data-p="stars" style="color:var(--muted)"><span class="dot" style="background:var(--am)"></span>Stars</button>
-<button data-p="sbp" style="color:var(--muted)"><span class="dot" style="background:var(--v)"></span>Рубли СБП</button>
+<button data-p="sbp" style="color:var(--muted)"><span class="dot" style="background:var(--v)"></span><span data-t="pay-sbp">Рубли СБП</span></button>
 </div>
 </div>
 
 <div id="p" class="grid">
-<div class="card"><div class="c-name" data-t="start" data-lbl-crypto="Лайт" data-lbl-sbp="Старт" data-lbl-stars="Старт">Лайт</div><div class="c-price"><span class="num" data-crypto="99" data-sbp="29" data-stars="50">99</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d50" data-txt-crypto="200 запросов к Claude AI" data-txt-sbp="50 запросов к Claude AI" data-txt-stars="50 запросов к Claude AI">200 запросов к Claude AI</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f50" data-txt-crypto="200 Claude Create" data-txt-sbp="50 Claude Create" data-txt-stars="50 Claude Create">200 Claude Create</span></li><li><span class="ic ic-g"></span><span data-t="forever">Бессрочно</span></li><li><span class="ic ic-g"></span><span data-t="allf">Все функции</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_pkg_200" data-link-crypto="https://t.me/NBroks_bot?start=pay_pkg_200" data-link-sbp="https://t.me/NBroks_bot?start=pay_pkg_50" data-link-stars="https://t.me/NBroks_bot?start=pay_pkg_50" class="btn btn-ghost" data-t="buy">Купить</a></div>
-<div class="card star"><div class="star-badge" data-t="popular">Популярный</div><div class="c-name" data-t="optimal" data-lbl-crypto="Оптимальный" data-lbl-sbp="Оптимальный" data-lbl-stars="Оптимальный">Оптимальный</div><div class="c-price"><span class="num" data-crypto="149" data-sbp="149" data-stars="250">149</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d300" data-txt-crypto="300 запросов к Claude AI" data-txt-sbp="300 запросов к Claude AI" data-txt-stars="300 запросов к Claude AI">300 запросов к Claude AI</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f300" data-txt-crypto="300 Claude Create" data-txt-sbp="300 Claude Create" data-txt-stars="300 Claude Create">300 Claude Create</span></li><li><span class="ic ic-g"></span><span data-t="forever">Бессрочно</span></li><li><span class="ic ic-v"></span><span data-t="save34">Выгоднее за запрос</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_pkg_300" data-link-crypto="https://t.me/NBroks_bot?start=pay_pkg_300" data-link-sbp="https://t.me/NBroks_bot?start=pay_pkg_300" data-link-stars="https://t.me/NBroks_bot?start=pay_pkg_300" class="btn btn-glow" data-t="buy">Купить</a></div>
-<div class="card"><div class="c-name" data-t="pro" data-lbl-crypto="Про" data-lbl-sbp="Про" data-lbl-stars="Про">Про</div><div class="c-price"><span class="num" data-crypto="499" data-sbp="499" data-stars="800">499</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d1000" data-txt-crypto="1000 запросов к Claude AI" data-txt-sbp="1000 запросов к Claude AI" data-txt-stars="1000 запросов к Claude AI">1000 запросов к Claude AI</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f1000" data-txt-crypto="1000 Claude Create" data-txt-sbp="1000 Claude Create" data-txt-stars="1000 Claude Create">1000 Claude Create</span></li><li><span class="ic ic-g"></span><span data-t="forever">Бессрочно</span></li><li><span class="ic ic-v"></span><span data-t="save48">Экономия 48%</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_pkg_1000" data-link-crypto="https://t.me/NBroks_bot?start=pay_pkg_1000" data-link-sbp="https://t.me/NBroks_bot?start=pay_pkg_1000" data-link-stars="https://t.me/NBroks_bot?start=pay_pkg_1000" class="btn btn-ghost" data-t="buy">Купить</a></div>
+<div class="card"><div class="c-name" data-t="start" data-lbl-crypto="Лайт" data-lbl-sbp="Старт" data-lbl-stars="Старт">Лайт</div><div class="c-price"><span class="num" data-crypto="99" data-sbp="29" data-stars="50">99</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d50" data-txt-crypto="200 запросов к Claude AI" data-txt-sbp="50 запросов к Claude AI" data-txt-stars="50 запросов к Claude AI">200 запросов к Claude AI</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f50" data-txt-crypto="200 Claude Create" data-txt-sbp="50 Claude Create" data-txt-stars="50 Claude Create">200 Claude Create</span></li><li><span class="ic ic-g"></span><span data-t="forever">Бессрочно</span></li><li><span class="ic ic-g"></span><span data-t="allf">Все функции</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_pkg_200" data-tariff="pkg_200" data-link-crypto="https://t.me/NBroks_bot?start=pay_pkg_200" data-link-sbp="https://t.me/NBroks_bot?start=pay_pkg_50" data-link-stars="https://t.me/NBroks_bot?start=pay_pkg_50" class="btn btn-ghost" data-t="buy">Купить</button></div>
+<div class="card star"><div class="star-badge" data-t="popular">Популярный</div><div class="c-name" data-t="optimal" data-lbl-crypto="Оптимальный" data-lbl-sbp="Оптимальный" data-lbl-stars="Оптимальный">Оптимальный</div><div class="c-price"><span class="num" data-crypto="149" data-sbp="149" data-stars="250">149</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d300" data-txt-crypto="300 запросов к Claude AI" data-txt-sbp="300 запросов к Claude AI" data-txt-stars="300 запросов к Claude AI">300 запросов к Claude AI</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f300" data-txt-crypto="300 Claude Create" data-txt-sbp="300 Claude Create" data-txt-stars="300 Claude Create">300 Claude Create</span></li><li><span class="ic ic-g"></span><span data-t="forever">Бессрочно</span></li><li><span class="ic ic-v"></span><span data-t="save34">Выгоднее за запрос</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_pkg_300" data-tariff="pkg_300" data-link-crypto="https://t.me/NBroks_bot?start=pay_pkg_300" data-link-sbp="https://t.me/NBroks_bot?start=pay_pkg_300" data-link-stars="https://t.me/NBroks_bot?start=pay_pkg_300" class="btn btn-glow" data-t="buy">Купить</button></div>
+<div class="card"><div class="c-name" data-t="pro" data-lbl-crypto="Про" data-lbl-sbp="Про" data-lbl-stars="Про">Про</div><div class="c-price"><span class="num" data-crypto="499" data-sbp="499" data-stars="800">499</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d1000" data-txt-crypto="1000 запросов к Claude AI" data-txt-sbp="1000 запросов к Claude AI" data-txt-stars="1000 запросов к Claude AI">1000 запросов к Claude AI</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f1000" data-txt-crypto="1000 Claude Create" data-txt-sbp="1000 Claude Create" data-txt-stars="1000 Claude Create">1000 Claude Create</span></li><li><span class="ic ic-g"></span><span data-t="forever">Бессрочно</span></li><li><span class="ic ic-v"></span><span data-t="save48">Экономия 48%</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_pkg_1000" data-tariff="pkg_1000" data-link-crypto="https://t.me/NBroks_bot?start=pay_pkg_1000" data-link-sbp="https://t.me/NBroks_bot?start=pay_pkg_1000" data-link-stars="https://t.me/NBroks_bot?start=pay_pkg_1000" class="btn btn-ghost" data-t="buy">Купить</button></div>
 </div>
 
 <div id="s" class="grid" style="display:none">
-<div class="card"><div class="c-name" data-t="week">Неделя</div><div class="c-price"><span class="num" data-crypto="199" data-sbp="249" data-stars="350">199</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d50w">50 запросов/день, 7 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f50d">50 в день</span></li><li><span class="ic ic-g"></span><span data-t="d7">7 дней</span></li><li><span class="ic ic-g"></span><span data-t="allf">Все функции</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_sub_week" class="btn btn-ghost" data-t="connect">Подключить</a></div>
-<div class="card star"><div class="star-badge" data-t="profitable">Выгодный</div><div class="c-name" data-t="month">Месяц</div><div class="c-price"><span class="num" data-crypto="599" data-sbp="699" data-stars="1 000">599</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d50m">50 запросов/день, 30 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f50d">50 в день</span></li><li><span class="ic ic-g"></span><span data-t="d30">30 дней</span></li><li><span class="ic ic-v"></span><span data-t="cheap29">Дешевле на 29%</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_sub_month" class="btn btn-glow" data-t="connect">Подключить</a></div>
-<div class="card"><div class="c-name" data-t="year">Год</div><div class="c-price"><span class="num" data-crypto="3 990" data-sbp="4 990" data-stars="6 500">3 990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d100y">100 запросов/день, 365 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f100d">100 в день</span></li><li><span class="ic ic-g"></span><span data-t="d365">365 дней</span></li><li><span class="ic ic-v"></span><span data-t="save72">Экономия 72%</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_sub_year" class="btn btn-ghost" data-t="connect">Подключить</a></div>
+<div class="card"><div class="c-name" data-t="week">Неделя</div><div class="c-price"><span class="num" data-crypto="199" data-sbp="249" data-stars="350">199</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d50w">50 запросов/день, 7 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f50d">50 в день</span></li><li><span class="ic ic-g"></span><span data-t="d7">7 дней</span></li><li><span class="ic ic-g"></span><span data-t="allf">Все функции</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_sub_week" data-tariff="sub_week" class="btn btn-ghost" data-t="connect">Подключить</button></div>
+<div class="card star"><div class="star-badge" data-t="profitable">Выгодный</div><div class="c-name" data-t="month">Месяц</div><div class="c-price"><span class="num" data-crypto="599" data-sbp="699" data-stars="1 000">599</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d50m">50 запросов/день, 30 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f50d">50 в день</span></li><li><span class="ic ic-g"></span><span data-t="d30">30 дней</span></li><li><span class="ic ic-v"></span><span data-t="cheap29">Дешевле на 29%</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_sub_month" data-tariff="sub_month" class="btn btn-glow" data-t="connect">Подключить</button></div>
+<div class="card"><div class="c-name" data-t="year">Год</div><div class="c-price"><span class="num" data-crypto="3 990" data-sbp="4 990" data-stars="6 500">3 990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="d100y">100 запросов/день, 365 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="f100d">100 в день</span></li><li><span class="ic ic-g"></span><span data-t="d365">365 дней</span></li><li><span class="ic ic-v"></span><span data-t="save72">Экономия 72%</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_sub_year" data-tariff="sub_year" class="btn btn-ghost" data-t="connect">Подключить</button></div>
 </div>
 
 <div id="u" class="grid" style="display:none">
-<div class="card"><div class="c-name" data-t="unl-week">Безлимит неделя</div><div class="c-price"><span class="num" data-crypto="990" data-sbp="1 190" data-stars="1 500">990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="du7">Без ограничений, 7 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="unlimited">Безлимитно</span></li><li><span class="ic ic-g"></span><span data-t="d7">7 дней</span></li><li><span class="ic ic-g"></span><span data-t="priority">Приоритет</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_unl_week" class="btn btn-ghost" data-t="connect">Подключить</a></div>
-<div class="card star"><div class="star-badge" data-t="maximum">Максимум</div><div class="c-name" data-t="unl-month">Безлимит месяц</div><div class="c-price"><span class="num" data-crypto="2 990" data-sbp="3 490" data-stars="5 000">2 990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="du30">Без ограничений, 30 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="unlimited">Безлимитно</span></li><li><span class="ic ic-g"></span><span data-t="d30">30 дней</span></li><li><span class="ic ic-v"></span><span data-t="cheap57">Дешевле на 57%</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_unl_month" class="btn btn-glow" data-t="connect">Подключить</a></div>
-<div class="card"><div class="c-name" data-t="unl-year">Безлимит год</div><div class="c-price"><span class="num" data-crypto="19 990" data-sbp="24 990" data-stars="35 000">19 990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="du365">Без ограничений, 365 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="unlimited">Безлимитно</span></li><li><span class="ic ic-g"></span><span data-t="d365">365 дней</span></li><li><span class="ic ic-v"></span><span data-t="save86">Экономия 86%</span></li></ul><a href="https://t.me/NBroks_bot?start=pay_unl_year" class="btn btn-ghost" data-t="connect">Подключить</a></div>
+<div class="card"><div class="c-name" data-t="unl-week">Безлимит неделя</div><div class="c-price"><span class="num" data-crypto="990" data-sbp="1 190" data-stars="1 500">990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="du7">Без ограничений, 7 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="unlimited">Безлимитно</span></li><li><span class="ic ic-g"></span><span data-t="d7">7 дней</span></li><li><span class="ic ic-g"></span><span data-t="priority">Приоритет</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_unl_week" data-tariff="unl_week" class="btn btn-ghost" data-t="connect">Подключить</button></div>
+<div class="card star"><div class="star-badge" data-t="maximum">Максимум</div><div class="c-name" data-t="unl-month">Безлимит месяц</div><div class="c-price"><span class="num" data-crypto="2 990" data-sbp="3 490" data-stars="5 000">2 990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="du30">Без ограничений, 30 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="unlimited">Безлимитно</span></li><li><span class="ic ic-g"></span><span data-t="d30">30 дней</span></li><li><span class="ic ic-v"></span><span data-t="cheap57">Дешевле на 57%</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_unl_month" data-tariff="unl_month" class="btn btn-glow" data-t="connect">Подключить</button></div>
+<div class="card"><div class="c-name" data-t="unl-year">Безлимит год</div><div class="c-price"><span class="num" data-crypto="19 990" data-sbp="24 990" data-stars="35 000">19 990</span><span class="cur" data-rub="₽" data-star="Stars">₽</span></div><div class="c-desc"><span data-t="du365">Без ограничений, 365 дней</span></div><ul class="feats"><li><span class="ic ic-g"></span><span data-t="unlimited">Безлимитно</span></li><li><span class="ic ic-g"></span><span data-t="d365">365 дней</span></li><li><span class="ic ic-v"></span><span data-t="save86">Экономия 86%</span></li></ul><button data-link-default="https://t.me/NBroks_bot?start=pay_unl_year" data-tariff="unl_year" class="btn btn-ghost" data-t="connect">Подключить</button></div>
 </div>
 
 <div class="divider"></div>
@@ -235,10 +256,10 @@ if(b)b.style.display='block';
 <div id="hdr-cr" style="cursor:pointer">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
 <span style="width:36px;height:36px;border-radius:12px;background:rgba(16,185,129,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="width:10px;height:10px;border-radius:50%;background:var(--em);box-shadow:0 0 8px rgba(16,185,129,0.4)"></span></span>
-<div style="flex:1"><div style="font-weight:600;font-size:15px">CryptoBot</div><div style="font-size:12px;color:var(--em)" data-t="best-price">Лучшие цены</div></div>
+<div style="flex:1"><div style="font-weight:600;font-size:15px" data-t="cr-title">Крипто 350+</div><div style="font-size:12px;color:var(--em)" data-t="best-price">Лучшие цены</div></div>
 <span id="arr-cr" style="font-size:11px;color:var(--muted);transition:transform 0.3s">&#9660;</span>
 </div>
-<div style="font-size:13px;color:var(--muted)" data-t="crypto-desc">Крипта и быстрая оплата</div>
+<div style="font-size:13px;color:var(--muted)" data-t="crypto-desc">BTC, ETH, USDT и 350+ монет</div>
 </div>
 <div id="body-cr" style="display:none;margin-top:20px;border-top:1px solid var(--border);padding-top:12px">
 <div class="cat-toggle" id="ct-cr-pkg"><span class="cat-label" data-t="cat-pkg">Пакеты</span><span class="cat-arrow" id="ca-cr-pkg">&#9654;</span></div>
@@ -295,8 +316,8 @@ if(b)b.style.display='block';
 <div style="max-width:620px;margin:0 auto 96px">
 <div class="fi"><div class="fh"><span data-t="fq1">Что входит в бесплатный план?</span><span>+</span></div><div class="fb" data-t="fa1">5 запросов к Claude AI каждый день. Доступны все функции: чат, голосовые ответы, изображения, переводчик, конструктор ботов.</div></div>
 <div class="fi"><div class="fh"><span data-t="fq2">Чем пакет отличается от подписки?</span><span>+</span></div><div class="fb" data-t="fa2">Пакет — фиксированное количество запросов без срока действия. Подписка — лимит запросов каждый день на определённый период.</div></div>
-<div class="fi"><div class="fh"><span data-t="fq3">Как оплатить?</span><span>+</span></div><div class="fb" data-t="fa3">Три способа: CryptoBot (крипта, самые низкие цены), Telegram Stars (удобно прямо в Telegram), рубли через СБП (любой банк).</div></div>
-<div class="fi"><div class="fh"><span data-t="fq4">Почему через CryptoBot дешевле?</span><span>+</span></div><div class="fb" data-t="fa4">Комиссия CryptoBot всего 1%. У Stars — 30% забирают Apple и Google. Поэтому Stars дороже.</div></div>
+<div class="fi"><div class="fh"><span data-t="fq3">Как оплатить?</span><span>+</span></div><div class="fb" data-t="fa3">Три способа: криптовалюта (350+ монет, самые низкие цены), Telegram Stars (удобно прямо в Telegram), рубли через СБП (любой банк).</div></div>
+<div class="fi"><div class="fh"><span data-t="fq4">Почему через крипту дешевле?</span><span>+</span></div><div class="fb" data-t="fa4">Комиссия всего 0.5%. У Stars — 30% забирают Apple и Google. Поэтому Stars дороже.</div></div>
 <div class="fi"><div class="fh"><span data-t="fq5">Можно вернуть деньги?</span><span>+</span></div><div class="fb" data-t="fa5">Если не использовали ни одного запроса — да, напишите в поддержку @naebase. После использования возврат невозможен.</div></div>
 </div>
 
@@ -311,250 +332,271 @@ if(b)b.style.display='block';
 <footer><a href="https://t.me/NBroks_bot" data-t="footer">Broks AI</a> — AI-ассистент нового поколения<br><span style="display:inline-block;margin-top:10px;opacity:0.5">@NBroks_bot</span></footer>
 </div>
 
+<!-- ========== CRYPTO PAY MODAL ========== -->
+<div class="pay-overlay" id="payOverlay">
+<div class="pay-modal">
+<button class="pm-close" id="pmClose">✕</button>
+<div class="pm-body">
+<div id="pmStep1">
+<div class="pm-title">Оплата криптой</div>
+<div class="pm-sub" id="pmTariffName">—</div>
+<div class="pm-step">
+<div class="pm-label">Выбери монету</div>
+<div class="coin-grid" id="coinGrid">
+<button class="coin-btn coin-on" data-coin="usdttrc20">USDT<br><span style="font-size:9px;color:var(--dim)">TRC20</span></button>
+<button class="coin-btn" data-coin="btc">BTC</button>
+<button class="coin-btn" data-coin="eth">ETH</button>
+<button class="coin-btn" data-coin="ton">TON</button>
+<button class="coin-btn" data-coin="sol">SOL</button>
+<button class="coin-btn" data-coin="trx">TRX</button>
+<button class="coin-btn" data-coin="ltc">LTC</button>
+<button class="coin-btn" data-coin="doge">DOGE</button>
+<button class="coin-btn" data-coin="xrp">XRP</button>
+<button class="coin-btn" data-coin="bnbbsc">BNB</button>
+<button class="coin-btn" data-coin="matic">MATIC</button>
+<button class="coin-btn" data-coin="ada">ADA</button>
+</div>
+</div>
+<button class="pm-action-btn primary" id="pmCreateBtn">Создать счёт →</button>
+</div>
+<div id="pmStep2" style="display:none">
+<div class="pm-title">Отправь оплату</div>
+<div class="pm-sub">Переведи точную сумму на адрес ниже</div>
+<div class="pay-info">
+<div class="pay-info-row"><span class="pay-info-label">Сумма</span><span class="pay-info-val" id="pmPayAmount">—</span></div>
+<div class="pay-info-row"><span class="pay-info-label">Монета</span><span class="pay-info-val" id="pmPayCoin" style="text-transform:uppercase">—</span></div>
+<div class="pay-info-row"><span class="pay-info-label">Цена USD</span><span class="pay-info-val" id="pmPriceUsd">—</span></div>
+</div>
+<div class="pm-label">Адрес для оплаты</div>
+<div class="pay-addr-box"><div class="pay-addr" id="pmAddr">—</div><button class="copy-btn" id="pmCopyBtn">Copy</button></div>
+<div class="qr-box" id="pmQrBox"></div>
+<div id="pmStatusBox" class="status-box status-waiting">
+<div class="status-icon pulsing">⏳</div>
+<div class="status-text" id="pmStatusText">Ожидание оплаты...</div>
+<div class="status-sub" id="pmStatusSub">Автоматическая проверка каждые 5 сек</div>
+</div>
+<button class="pm-action-btn secondary" id="pmBackBtn">← Назад</button>
+</div>
+<div id="pmStep3" style="display:none">
+<div style="text-align:center;padding:20px 0">
+<div style="font-size:64px;margin-bottom:16px">🎉</div>
+<div class="pm-title" style="margin-bottom:8px">Оплата получена!</div>
+<div class="pm-sub">Запросы начислены на ваш аккаунт</div>
+<button class="pm-action-btn primary" id="pmDoneBtn" style="margin-top:24px">Готово ✓</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
 (function(){
-  // State
   var currentPay='crypto';
   var currentCur='RUB';
   var rates={RUB:1,USD:0.0124,EUR:0.0106,CNY:0.087,GBP:0.0092,TRY:0.48,KZT:6.4,UAH:0.51};
   var symbols={RUB:'₽',USD:'$',EUR:'€',CNY:'¥',GBP:'£',TRY:'₺',KZT:'₸',UAH:'₴'};
   var colors={crypto:'var(--em)',sbp:'var(--v2)',stars:'var(--am)'};
 
-  // Fetch live rates
+  // ← ЗАМЕНИ на свой Cloudflare tunnel URL
+  // ← ЗАМЕНИ на свой Cloudflare tunnel (cloudflared tunnel --url http://localhost:8081)
+  // Пример: 'https://abc-xyz.trycloudflare.com'
+  var NP_API = 'https://things-therapeutic-adware-respective.trycloudflare.com';
+
+  var tgUser=0;
+  if(window.Telegram&&window.Telegram.WebApp){
+    var tg=window.Telegram.WebApp;tg.expand();tg.ready();
+    try{tg.disableVerticalSwipes();}catch(e){}
+    if(tg.initDataUnsafe&&tg.initDataUnsafe.user) tgUser=tg.initDataUnsafe.user.id;
+  }
+
   fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/rub.json')
-    .then(function(r){return r.json()})
-    .then(function(data){
-      if(data&&data.rub){
-        var r=data.rub;
-        if(r.usd)rates.USD=r.usd;
-        if(r.eur)rates.EUR=r.eur;
-        if(r.cny)rates.CNY=r.cny;
-        if(r.gbp)rates.GBP=r.gbp;
-        if(r['try'])rates.TRY=r['try'];
-        if(r.kzt)rates.KZT=r.kzt;
-        if(r.uah)rates.UAH=r.uah;
-      }
+    .then(function(r){return r.json()}).then(function(data){
+      if(data&&data.rub){var r=data.rub;if(r.usd)rates.USD=r.usd;if(r.eur)rates.EUR=r.eur;if(r.cny)rates.CNY=r.cny;if(r.gbp)rates.GBP=r.gbp;if(r['try'])rates.TRY=r['try'];if(r.kzt)rates.KZT=r.kzt;if(r.uah)rates.UAH=r.uah;}
     }).catch(function(){});
 
-  // Master update function — updates ALL prices everywhere
   function updateAllPrices(){
-    var cur=currentCur;
-    var pay=currentPay;
-    var rate=rates[cur];
-    var sym=symbols[cur];
-
-    // 1. Update main tariff cards — prices
+    var cur=currentCur,pay=currentPay,rate=rates[cur],sym=symbols[cur];
     var nums=document.querySelectorAll('.num');
     for(var n=0;n<nums.length;n++){
       var baseRub=parseFloat(nums[n].getAttribute('data-'+pay).replace(/\s/g,''));
       if(isNaN(baseRub))continue;
-      if(pay==='stars'){
-        nums[n].textContent=nums[n].getAttribute('data-stars');
-      } else {
-        var converted=Math.round(baseRub*rate);
-        if(cur!=='RUB'&&converted<1) converted=(baseRub*rate).toFixed(2);
-        nums[n].textContent=String(converted).replace(/\B(?=(\d{3})+(?!\d))/g,' ');
-      }
+      if(pay==='stars'){nums[n].textContent=nums[n].getAttribute('data-stars');}
+      else{var converted=Math.round(baseRub*rate);if(cur!=='RUB'&&converted<1)converted=(baseRub*rate).toFixed(2);nums[n].textContent=String(converted).replace(/\B(?=(\d{3})+(?!\d))/g,' ');}
     }
     var curs=document.querySelectorAll('.cur');
-    for(var c=0;c<curs.length;c++){
-      curs[c].textContent=(pay==='stars')?'Stars':sym;
-    }
-
-    // 1b. Update dynamic texts (names, descriptions, features) per payment method
+    for(var c=0;c<curs.length;c++){curs[c].textContent=(pay==='stars')?'Stars':sym;}
     var dynTexts=document.querySelectorAll('[data-txt-crypto]');
-    for(var dt=0;dt<dynTexts.length;dt++){
-      var txt=dynTexts[dt].getAttribute('data-txt-'+pay);
-      if(txt) dynTexts[dt].textContent=txt;
-    }
+    for(var dt=0;dt<dynTexts.length;dt++){var txt=dynTexts[dt].getAttribute('data-txt-'+pay);if(txt)dynTexts[dt].textContent=txt;}
     var dynLabels=document.querySelectorAll('[data-lbl-crypto]');
-    for(var dl=0;dl<dynLabels.length;dl++){
-      var lbl=dynLabels[dl].getAttribute('data-lbl-'+pay);
-      if(lbl) dynLabels[dl].textContent=lbl;
-    }
-    var dynLinks=document.querySelectorAll('[data-link-crypto]');
-    for(var dli=0;dli<dynLinks.length;dli++){
-      var lnk=dynLinks[dli].getAttribute('data-link-'+pay);
-      if(lnk) dynLinks[dli].setAttribute('href',lnk);
-    }
-
-    // 2. Update comparison section prices
-    var compPrices=document.querySelectorAll('.cp');
-    for(var cp=0;cp<compPrices.length;cp++){
-      var baseRub2=parseFloat(compPrices[cp].getAttribute('data-rub'));
-      var isStar=compPrices[cp].hasAttribute('data-star');
-      if(isStar){
-        compPrices[cp].textContent=compPrices[cp].getAttribute('data-star');
-      } else {
-        var conv2=Math.round(baseRub2*rate);
-        if(cur!=='RUB'&&conv2<1) conv2=(baseRub2*rate).toFixed(2);
-        compPrices[cp].textContent=String(conv2).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' '+sym;
-      }
-    }
+    for(var dl=0;dl<dynLabels.length;dl++){var lbl=dynLabels[dl].getAttribute('data-lbl-'+pay);if(lbl)dynLabels[dl].textContent=lbl;}
   }
 
   // Tariff tabs
-  var tIds=['p','s','u'], tBtns=document.querySelectorAll('#T button');
+  var tIds=['p','s','u'],tBtns=document.querySelectorAll('#T button');
   for(var i=0;i<tBtns.length;i++) tBtns[i].addEventListener('click',function(){
     var t=this.getAttribute('data-t');
     for(var j=0;j<tBtns.length;j++) tBtns[j].classList.remove('on');
     this.classList.add('on');
-    for(var k=0;k<tIds.length;k++){
-      var el=document.getElementById(tIds[k]);
-      if(tIds[k]===t){el.style.display='';el.style.animation='none';el.offsetHeight;el.style.animation='reveal 0.6s ease forwards';}
-      else el.style.display='none';
-    }
+    for(var k=0;k<tIds.length;k++){var el=document.getElementById(tIds[k]);if(tIds[k]===t){el.style.display='';el.style.animation='none';el.offsetHeight;el.style.animation='reveal 0.6s ease forwards';}else el.style.display='none';}
   });
 
-  // Payment method tabs
+  // Payment tabs
   var pBtns=document.querySelectorAll('#P button');
   for(var p=0;p<pBtns.length;p++) pBtns[p].addEventListener('click',function(){
-    var pay=this.getAttribute('data-p');
-    currentPay=pay;
-    for(var q=0;q<pBtns.length;q++){
-      pBtns[q].classList.remove('pay-on');
-      pBtns[q].style.color='var(--muted)';
-    }
-    this.classList.add('pay-on');
-    this.style.color=colors[pay];
+    var pay=this.getAttribute('data-p');currentPay=pay;
+    for(var q=0;q<pBtns.length;q++){pBtns[q].classList.remove('pay-on');pBtns[q].style.color='var(--muted)';}
+    this.classList.add('pay-on');this.style.color=colors[pay];
     updateAllPrices();
   });
 
-  // Currency selector
-  var curSel=document.getElementById('currSel');
-  curSel.addEventListener('change',function(){
-    currentCur=this.value;
-    updateAllPrices();
-  });
+  document.getElementById('currSel').addEventListener('change',function(){currentCur=this.value;updateAllPrices();});
 
-  // Payment comparison cards
-  var cIds=['cr','sb','st'], catIds=['pkg','sub','unl'];
+  // Compare cards
+  var cIds=['cr','sb','st'],catIds=['pkg','sub','unl'];
   for(var c=0;c<cIds.length;c++){
     (function(id){
       document.getElementById('hdr-'+id).addEventListener('click',function(){
-        var bd=document.getElementById('body-'+id);
-        var ar=document.getElementById('arr-'+id);
+        var bd=document.getElementById('body-'+id),ar=document.getElementById('arr-'+id);
         var open=bd.style.display!=='none';
-        bd.style.display=open?'none':'block';
-        ar.style.transform=open?'':'rotate(180deg)';
-        if(open) for(var x=0;x<catIds.length;x++){
-          var cb=document.getElementById('cb-'+id+'-'+catIds[x]);
-          var ca=document.getElementById('ca-'+id+'-'+catIds[x]);
-          if(cb)cb.style.maxHeight='0';
-          if(ca)ca.style.transform='';
-        }
+        bd.style.display=open?'none':'block';ar.style.transform=open?'':'rotate(180deg)';
+        if(open) for(var x=0;x<catIds.length;x++){var cb=document.getElementById('cb-'+id+'-'+catIds[x]),ca=document.getElementById('ca-'+id+'-'+catIds[x]);if(cb)cb.style.maxHeight='0';if(ca)ca.style.transform='';}
       });
       for(var d=0;d<catIds.length;d++){
         (function(cat){
           document.getElementById('ct-'+id+'-'+cat).addEventListener('click',function(e){
-            e.stopPropagation();
-            var cb=document.getElementById('cb-'+id+'-'+cat);
-            var ca=document.getElementById('ca-'+id+'-'+cat);
+            e.stopPropagation();var cb=document.getElementById('cb-'+id+'-'+cat),ca=document.getElementById('ca-'+id+'-'+cat);
             var open=cb.style.maxHeight&&cb.style.maxHeight!=='0px';
-            cb.style.maxHeight=open?'0':cb.scrollHeight+'px';
-            ca.style.transform=open?'':'rotate(90deg)';
+            cb.style.maxHeight=open?'0':cb.scrollHeight+'px';ca.style.transform=open?'':'rotate(90deg)';
           });
         })(catIds[d]);
       }
     })(cIds[c]);
   }
 
-  // Clickable price rows
+  // Compare row clicks
   var rows=document.querySelectorAll('.pr');
-  for(var r=0;r<rows.length;r++) rows[r].addEventListener('click',function(e){
-    e.stopPropagation();
-    window.open('https://t.me/NBroks_bot','_blank');
-  });
+  for(var r=0;r<rows.length;r++) rows[r].addEventListener('click',function(e){e.stopPropagation();window.open('https://t.me/NBroks_bot','_blank');});
 
   // FAQ
   var fis=document.querySelectorAll('.fi');
   for(var m=0;m<fis.length;m++) fis[m].addEventListener('click',function(){this.classList.toggle('open');});
 
-  // Language translations
+  // Currency update for compare section
+  var curSel=document.getElementById('currSel');
+
+  // =============================================
+  // BUY BUTTON → crypto modal OR deep link
+  // =============================================
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('button.btn[data-tariff]');
+    if(!a) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var tariff=a.getAttribute('data-tariff');
+
+    if(currentPay==='crypto'){
+      // Открываем крипто-модал внутри Mini App
+      openCryptoModal(tariff, a.closest('.card').querySelector('.c-name').textContent);
+      return;
+    }
+
+    // Stars / SBP — deep link через data-link-* атрибуты
+    var link=a.getAttribute('data-link-'+currentPay)||a.getAttribute('data-link-default')||'';
+    if(link){
+      if(window.Telegram&&window.Telegram.WebApp){
+        try{window.Telegram.WebApp.openTelegramLink(link);}catch(err){window.open(link,'_blank');}
+      } else {
+        window.open(link,'_blank');
+      }
+    }
+  });
+
+  // =============================================
+  // CRYPTO MODAL — NOWPayments inside Mini App
+  // =============================================
+  var selectedCoin='usdttrc20', currentTariff='', pollTimer=null;
+
+  function openCryptoModal(tariffId, tariffName){
+    currentTariff=tariffId;
+    document.getElementById('pmTariffName').textContent=tariffName;
+    document.getElementById('pmStep1').style.display='';
+    document.getElementById('pmStep2').style.display='none';
+    document.getElementById('pmStep3').style.display='none';
+    document.getElementById('payOverlay').classList.add('active');
+  }
+
+  document.getElementById('pmClose').addEventListener('click',closeModal);
+  document.getElementById('payOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+  function closeModal(){document.getElementById('payOverlay').classList.remove('active');if(pollTimer)clearInterval(pollTimer);pollTimer=null;}
+
+  document.getElementById('coinGrid').addEventListener('click',function(e){
+    var btn=e.target.closest('.coin-btn');if(!btn)return;
+    var all=this.querySelectorAll('.coin-btn');for(var i=0;i<all.length;i++)all[i].classList.remove('coin-on');
+    btn.classList.add('coin-on');selectedCoin=btn.getAttribute('data-coin');
+  });
+
+  document.getElementById('pmCreateBtn').addEventListener('click',function(){
+    var btn=this;btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Создаём...';
+    fetch(NP_API+'/np/create?tariff_id='+currentTariff+'&user_id='+tgUser+'&pay_currency='+selectedCoin,{method:'POST'})
+      .then(function(r){return r.json()}).then(function(d){
+        if(!d.ok)throw new Error(d.detail||'Error');
+        showPayScreen(d);
+      }).catch(function(err){
+        alert('Ошибка: '+err.message);
+      }).finally(function(){btn.disabled=false;btn.innerHTML='Создать счёт →';});
+  });
+
+  function showPayScreen(d){
+    document.getElementById('pmStep1').style.display='none';
+    document.getElementById('pmStep2').style.display='';
+    document.getElementById('pmPayAmount').textContent=d.pay_amount+' '+d.pay_currency.toUpperCase();
+    document.getElementById('pmPayCoin').textContent=d.pay_currency.toUpperCase();
+    document.getElementById('pmPriceUsd').textContent='$'+d.price_usd;
+    document.getElementById('pmAddr').textContent=d.pay_address;
+    document.getElementById('pmQrBox').innerHTML='<img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl='+encodeURIComponent(d.pay_address)+'&choe=UTF-8" alt="QR" width="180" height="180">';
+    var sb=document.getElementById('pmStatusBox');sb.className='status-box status-waiting';
+    document.getElementById('pmStatusText').textContent='Ожидание оплаты...';
+    document.getElementById('pmStatusSub').textContent='Автопроверка каждые 5 сек';
+    document.querySelector('#pmStep2 .status-icon').textContent='⏳';
+    document.querySelector('#pmStep2 .status-icon').classList.add('pulsing');
+    if(pollTimer)clearInterval(pollTimer);
+    pollTimer=setInterval(function(){checkSt(d.payment_id);},5000);
+  }
+
+  function checkSt(pid){
+    fetch(NP_API+'/np/status/'+pid).then(function(r){return r.json()}).then(function(d){
+      var s=d.status,sb=document.getElementById('pmStatusBox'),st=document.getElementById('pmStatusText'),ss=document.getElementById('pmStatusSub'),si=document.querySelector('#pmStep2 .status-icon');
+      if(s==='confirming'||s==='sending'){sb.className='status-box status-confirming';si.textContent='🔄';si.classList.add('pulsing');st.textContent='Подтверждаем...';ss.textContent='Транзакция в блокчейне';}
+      else if(s==='confirmed'||s==='finished'){sb.className='status-box status-done';si.textContent='✅';si.classList.remove('pulsing');st.textContent='Оплата подтверждена!';ss.textContent='';if(pollTimer)clearInterval(pollTimer);pollTimer=null;setTimeout(function(){document.getElementById('pmStep2').style.display='none';document.getElementById('pmStep3').style.display='';},1500);}
+      else if(s==='expired'||s==='failed'||s==='refunded'){si.textContent='❌';si.classList.remove('pulsing');st.textContent=s==='expired'?'Время истекло':'Ошибка';ss.textContent='Создайте новый счёт';if(pollTimer)clearInterval(pollTimer);pollTimer=null;}
+    }).catch(function(){});
+  }
+
+  document.getElementById('pmCopyBtn').addEventListener('click',function(){
+    var addr=document.getElementById('pmAddr').textContent,btn=this;
+    if(navigator.clipboard){navigator.clipboard.writeText(addr).then(function(){btn.textContent='✓';btn.classList.add('copied');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
+    else{var ta=document.createElement('textarea');ta.value=addr;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✓';btn.classList.add('copied');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);}
+  });
+
+  document.getElementById('pmBackBtn').addEventListener('click',function(){if(pollTimer)clearInterval(pollTimer);pollTimer=null;document.getElementById('pmStep2').style.display='none';document.getElementById('pmStep1').style.display='';});
+  document.getElementById('pmDoneBtn').addEventListener('click',closeModal);
+
+  // Language (same as original, shortened for key entries)
   var L={
-    ru:{chip:'Работает на Claude Sonnet',h1a:'Инвестируй в ',h1b:'свой AI',sub:'Три типа тарифов. Три способа оплаты. Начни бесплатно — масштабируй когда готов','tab-pkg':'Пакеты','tab-sub':'Подписки','tab-unl':'Безлимит',start:'Лайт',optimal:'Оптимальный',pro:'Про',week:'Неделя',month:'Месяц',year:'Год','unl-week':'Безлимит неделя','unl-month':'Безлимит месяц','unl-year':'Безлимит год',d50:'200 запросов к Claude AI',d300:'250 запросов к Claude AI',d1000:'1000 запросов к Claude AI',d50w:'50 запросов/день, 7 дней',d50m:'50 запросов/день, 30 дней',d100y:'100 запросов/день, 365 дней',du7:'Без ограничений, 7 дней',du30:'Без ограничений, 30 дней',du365:'Без ограничений, 365 дней',f50:'200 Claude Create',f300:'250 Claude Create',f1000:'1000 Claude Create',f50d:'50 в день',f100d:'100 в день',forever:'Бессрочно',allf:'Все функции',unlimited:'Безлимитно',priority:'Приоритет',d7:'7 дней',d30:'30 дней',d365:'365 дней',buy:'Купить',connect:'Подключить',popular:'Популярный',profitable:'Выгодный',maximum:'Максимум',save34:'Выгоднее за запрос',save48:'Экономия 48%',cheap29:'Дешевле на 29%',save72:'Экономия 72%',cheap57:'Дешевле на 57%',save86:'Экономия 86%',compare:'Сравни способы оплаты','faq-title':'Частые вопросы','best-price':'Лучшие цены','fast-pay':'Быстрая оплата','in-tg':'Прямо в Telegram','crypto-desc':'Крипта и быстрая оплата','bank-desc':'Оплата с любого банка','fast-easy':'Быстро и удобно',fq1:'Что входит в бесплатный план?',fq2:'Чем пакет отличается от подписки?',fq3:'Как оплатить?',fq4:'Почему через CryptoBot дешевле?',fq5:'Можно вернуть деньги?',fa1:'5 запросов к Claude AI каждый день. Доступны все функции: чат, голосовые ответы, изображения, переводчик, конструктор ботов.',fa2:'Пакет — фиксированное количество запросов без срока действия. Подписка — лимит запросов каждый день на определённый период.',fa3:'Три способа: CryptoBot (крипта, самые низкие цены), Telegram Stars (удобно прямо в Telegram), рубли через СБП (любой банк).',fa4:'Комиссия CryptoBot всего 1%. У Stars — 30% забирают Apple и Google. Поэтому Stars дороже.',fa5:'Если не использовали ни одного запроса — да, напишите в поддержку @naebase. После использования возврат невозможен.',footer:'Broks AI</a> — AI-ассистент нового поколения',l50:'200 запросов',l100:'250 запросов',l300:'300 запросов',l1000:'1000 запросов',lweek:'Неделя',lmonth:'Месяц',l3month:'3 месяца',lyear:'Год','cat-pkg':'Пакеты','cat-sub':'Подписки','cat-unl':'Безлимит','fun-label':'Интересный факт','fun-text':'Этот сайт полностью создан ботом Broks AI — от дизайна и кода до подключения платёжных систем. Ни одной строчки не было написано человеком. Именно так работает AI-автоматизация будущего.'},
-    en:{chip:'Powered by Claude Sonnet',h1a:'Invest in ',h1b:'your AI',sub:'Three plan types. Three payment methods. Start free — scale when ready','tab-pkg':'Packages','tab-sub':'Subscriptions','tab-unl':'Unlimited',start:'Lite',optimal:'Optimal',pro:'Pro',week:'Weekly',month:'Monthly',year:'Yearly','unl-week':'Unlimited week','unl-month':'Unlimited month','unl-year':'Unlimited year',d50:'200 requests to Claude AI',d300:'250 requests to Claude AI',d1000:'1000 requests to Claude AI',d50w:'50 requests/day, 7 days',d50m:'50 requests/day, 30 days',d100y:'100 requests/day, 365 days',du7:'Unlimited, 7 days',du30:'Unlimited, 30 days',du365:'Unlimited, 365 days',f50:'200 Claude Create',f300:'250 Claude Create',f1000:'1000 Claude Create',f50d:'50 per day',f100d:'100 per day',forever:'No expiration',allf:'All features',unlimited:'Unlimited',priority:'Priority access',d7:'7 days',d30:'30 days',d365:'365 days',buy:'Buy',connect:'Subscribe',popular:'Popular',profitable:'Best value',maximum:'Maximum',save34:'Better per request',save48:'Save 48%',cheap29:'29% cheaper',save72:'Save 72%',cheap57:'57% cheaper',save86:'Save 86%',compare:'Compare payment methods','faq-title':'FAQ','best-price':'Best prices','fast-pay':'Fast payment','in-tg':'Right in Telegram','crypto-desc':'Crypto and fast payment','bank-desc':'Pay from any bank','fast-easy':'Fast and convenient',fq1:'What\'s included in the free plan?',fq2:'What\'s the difference between a package and subscription?',fq3:'How to pay?',fq4:'Why is CryptoBot cheaper?',fq5:'Can I get a refund?',fa1:'5 Claude AI requests every day. All features available: chat, voice, images, translator, bot constructor.',fa2:'Package — fixed number of requests with no expiration. Subscription — daily request limit for a set period.',fa3:'Three ways: CryptoBot (crypto, lowest prices), Telegram Stars (convenient), bank transfer via SBP.',fa4:'CryptoBot commission is only 1%. Stars — Apple and Google take 30%. That\'s why Stars cost more.',fa5:'If you haven\'t used any requests — yes, contact support @naebase. After use, refunds are not possible.',footer:'Broks AI</a> — next-gen AI assistant',l50:'200 requests',l100:'250 requests',l300:'300 requests',l1000:'1000 requests',lweek:'Week',lmonth:'Month',l3month:'3 months',lyear:'Year','cat-pkg':'Packages','cat-sub':'Subscriptions','cat-unl':'Unlimited','fun-label':'Fun fact','fun-text':'This entire website was built by the Broks AI bot — from design and code to payment integration. Not a single line was written by a human. This is how AI automation of the future works.'},
-    zh:{chip:'由 Claude Sonnet 驱动',h1a:'投资你的',h1b:'AI',sub:'三种套餐类型，三种支付方式。免费开始 — 随时扩展','tab-pkg':'套餐','tab-sub':'订阅','tab-unl':'无限制',start:'轻量',optimal:'最优',pro:'专业',week:'周卡',month:'月卡',year:'年卡','unl-week':'无限周卡','unl-month':'无限月卡','unl-year':'无限年卡',d50:'200次 Claude AI 请求',d300:'250次 Claude AI 请求',d1000:'1000次 Claude AI 请求',d50w:'每天50次，7天',d50m:'每天50次，30天',d100y:'每天100次，365天',du7:'无限制，7天',du30:'无限制，30天',du365:'无限制，365天',f50:'50次 Claude Create',f300:'300次 Claude Create',f1000:'1000次 Claude Create',f50d:'每天50次',f100d:'每天100次',forever:'永久有效',allf:'所有功能',unlimited:'无限制',priority:'优先访问',d7:'7天',d30:'30天',d365:'365天',buy:'购买',connect:'订阅',popular:'热门',profitable:'超值',maximum:'最强',save34:'每次请求更优惠',save48:'节省48%',cheap29:'便宜29%',save72:'节省72%',cheap57:'便宜57%',save86:'节省86%',compare:'比较支付方式','faq-title':'常见问题','best-price':'最优价格','fast-pay':'快速支付','in-tg':'Telegram内支付','crypto-desc':'加密货币快速支付','bank-desc':'任何银行支付','fast-easy':'快速便捷',fq1:'免费计划包含什么？',fq2:'套餐和订阅有什么区别？',fq3:'如何支付？',fq4:'为什么CryptoBot更便宜？',fq5:'可以退款吗？',fa1:'每天5次Claude AI请求。所有功能可用：聊天、语音、图片、翻译、机器人构建。',fa2:'套餐——固定数量的请求，永不过期。订阅——在特定期间内每天有请求限制。',fa3:'三种方式：CryptoBot（加密货币，最低价）、Telegram Stars（方便）、银行转账。',fa4:'CryptoBot佣金仅1%。Stars——苹果和谷歌收取30%。所以Stars更贵。',fa5:'如果您没有使用任何请求——可以，联系支持@naebase。使用后无法退款。',footer:'Broks AI</a> — 新一代AI助手',l50:'200次请求',l100:'250次请求',l300:'300次请求',l1000:'1000次请求',lweek:'周',lmonth:'月',l3month:'3个月',lyear:'年','cat-pkg':'套餐','cat-sub':'订阅','cat-unl':'无限制','fun-label':'有趣的事实','fun-text':'这个网站完全由 Broks AI 机器人创建——从设计和代码到支付系统的接入。没有一行代码是人类编写的。这就是未来AI自动化的运作方式。'},
-    tr:{chip:'Claude Sonnet ile çalışır',h1a:'AI\'nize ',h1b:'yatırım yapın',sub:'Üç plan türü. Üç ödeme yöntemi. Ücretsiz başlayın','tab-pkg':'Paketler','tab-sub':'Abonelikler','tab-unl':'Sınırsız',start:'Lite',optimal:'Optimal',pro:'Pro',week:'Haftalık',month:'Aylık',year:'Yıllık','unl-week':'Sınırsız hafta','unl-month':'Sınırsız ay','unl-year':'Sınırsız yıl',d50:'200 Claude AI isteği',d300:'250 Claude AI isteği',d1000:'1000 Claude AI isteği',d50w:'Günde 50, 7 gün',d50m:'Günde 50, 30 gün',d100y:'Günde 100, 365 gün',du7:'Sınırsız, 7 gün',du30:'Sınırsız, 30 gün',du365:'Sınırsız, 365 gün',f50:'200 Claude Create',f300:'250 Claude Create',f1000:'1000 Claude Create',f50d:'Günde 50',f100d:'Günde 100',forever:'Süresiz',allf:'Tüm özellikler',unlimited:'Sınırsız',priority:'Öncelikli erişim',d7:'7 gün',d30:'30 gün',d365:'365 gün',buy:'Satın Al',connect:'Abone Ol',popular:'Popüler',profitable:'En İyi Değer',maximum:'Maksimum',save34:'İstek başına daha iyi',save48:'%48 tasarruf',cheap29:'%29 daha ucuz',save72:'%72 tasarruf',cheap57:'%57 daha ucuz',save86:'%86 tasarruf',compare:'Ödeme yöntemlerini karşılaştır','faq-title':'SSS','best-price':'En iyi fiyatlar','fast-pay':'Hızlı ödeme','in-tg':'Telegram\'da','crypto-desc':'Kripto ve hızlı ödeme','bank-desc':'Herhangi bir bankadan','fast-easy':'Hızlı ve kolay',fq1:'Ücretsiz planda ne var?',fq2:'Paket ile abonelik arasındaki fark?',fq3:'Nasıl ödenir?',fq4:'CryptoBot neden daha ucuz?',fq5:'Para iadesi alabilir miyim?',fa1:'Her gün 5 Claude AI isteği. Tüm özellikler mevcut.',fa2:'Paket — süresi dolmayan sabit istek sayısı. Abonelik — belirli süre günlük limit.',fa3:'Üç yol: CryptoBot, Telegram Stars, banka havalesi.',fa4:'CryptoBot komisyonu sadece %1. Stars\'da Apple ve Google %30 alır.',fa5:'Hiç kullanmadıysanız — evet. Kullanımdan sonra iade yapılamaz.',footer:'Broks AI</a> — yeni nesil AI asistan',l50:'200 istek',l100:'250 istek',l300:'300 istek',l1000:'1000 istek',lweek:'Hafta',lmonth:'Ay',l3month:'3 ay',lyear:'Yıl','cat-pkg':'Paketler','cat-sub':'Abonelikler','cat-unl':'Sınırsız','fun-label':'İlginç bilgi','fun-text':'Bu web sitesi tamamen Broks AI botu tarafından oluşturuldu — tasarımdan koda, ödeme sistemlerine kadar. Tek bir satır bile insan tarafından yazılmadı. Geleceğin AI otomasyonu böyle çalışır.'},
-    de:{chip:'Betrieben mit Claude Sonnet',h1a:'Investiere in ',h1b:'deine KI',sub:'Drei Plantypen. Drei Zahlungsmethoden. Starte kostenlos','tab-pkg':'Pakete','tab-sub':'Abos','tab-unl':'Unlimited',start:'Lite',optimal:'Optimal',pro:'Pro',week:'Woche',month:'Monat',year:'Jahr','unl-week':'Unlimited Woche','unl-month':'Unlimited Monat','unl-year':'Unlimited Jahr',d50:'200 Claude AI Anfragen',d300:'250 Claude AI Anfragen',d1000:'1000 Claude AI Anfragen',d50w:'50/Tag, 7 Tage',d50m:'50/Tag, 30 Tage',d100y:'100/Tag, 365 Tage',du7:'Unbegrenzt, 7 Tage',du30:'Unbegrenzt, 30 Tage',du365:'Unbegrenzt, 365 Tage',f50:'200 Claude Create',f300:'250 Claude Create',f1000:'1000 Claude Create',f50d:'50 pro Tag',f100d:'100 pro Tag',forever:'Unbefristet',allf:'Alle Funktionen',unlimited:'Unbegrenzt',priority:'Priorität',d7:'7 Tage',d30:'30 Tage',d365:'365 Tage',buy:'Kaufen',connect:'Abonnieren',popular:'Beliebt',profitable:'Bester Wert',maximum:'Maximum',save34:'Günstiger pro Anfrage',save48:'48% sparen',cheap29:'29% günstiger',save72:'72% sparen',cheap57:'57% günstiger',save86:'86% sparen',compare:'Zahlungsmethoden vergleichen','faq-title':'FAQ','best-price':'Beste Preise','fast-pay':'Schnelle Zahlung','in-tg':'Direkt in Telegram','crypto-desc':'Krypto und schnelle Zahlung','bank-desc':'Von jeder Bank','fast-easy':'Schnell und bequem',fq1:'Was ist im kostenlosen Plan?',fq2:'Unterschied zwischen Paket und Abo?',fq3:'Wie bezahlen?',fq4:'Warum ist CryptoBot günstiger?',fq5:'Kann ich eine Rückerstattung bekommen?',fa1:'5 Claude AI Anfragen täglich. Alle Funktionen verfügbar.',fa2:'Paket — feste Anzahl ohne Ablauf. Abo — tägliches Limit für einen Zeitraum.',fa3:'Drei Wege: CryptoBot, Telegram Stars, Banküberweisung.',fa4:'CryptoBot Provision nur 1%. Bei Stars nehmen Apple und Google 30%.',fa5:'Wenn nicht genutzt — ja. Nach Nutzung keine Rückerstattung.',footer:'Broks AI</a> — KI-Assistent der nächsten Generation',l50:'200 Anfragen',l100:'250 Anfragen',l300:'300 Anfragen',l1000:'1000 Anfragen',lweek:'Woche',lmonth:'Monat',l3month:'3 Monate',lyear:'Jahr','cat-pkg':'Pakete','cat-sub':'Abos','cat-unl':'Unlimited','fun-label':'Fun fact','fun-text':'This entire website was built by the Broks AI bot — from design and code to payment integration. Not a single line was written by a human. This is how AI automation of the future works.'},
-    es:{chip:'Funciona con Claude Sonnet',h1a:'Invierte en ',h1b:'tu IA',sub:'Tres tipos de planes. Tres métodos de pago. Empieza gratis','tab-pkg':'Paquetes','tab-sub':'Suscripciones','tab-unl':'Ilimitado',start:'Lite',optimal:'Óptimo',pro:'Pro',week:'Semana',month:'Mes',year:'Año','unl-week':'Ilimitado semana','unl-month':'Ilimitado mes','unl-year':'Ilimitado año',d50:'200 solicitudes a Claude AI',d300:'250 solicitudes a Claude AI',d1000:'1000 solicitudes a Claude AI',d50w:'50/día, 7 días',d50m:'50/día, 30 días',d100y:'100/día, 365 días',du7:'Sin límites, 7 días',du30:'Sin límites, 30 días',du365:'Sin límites, 365 días',f50:'200 Claude Create',f300:'250 Claude Create',f1000:'1000 Claude Create',f50d:'50 por día',f100d:'100 por día',forever:'Sin vencimiento',allf:'Todas las funciones',unlimited:'Ilimitado',priority:'Acceso prioritario',d7:'7 días',d30:'30 días',d365:'365 días',buy:'Comprar',connect:'Suscribirse',popular:'Popular',profitable:'Mejor valor',maximum:'Máximo',save34:'Mejor por solicitud',save48:'Ahorra 48%',cheap29:'29% más barato',save72:'Ahorra 72%',cheap57:'57% más barato',save86:'Ahorra 86%',compare:'Compara métodos de pago','faq-title':'Preguntas frecuentes','best-price':'Mejores precios','fast-pay':'Pago rápido','in-tg':'Directo en Telegram','crypto-desc':'Cripto y pago rápido','bank-desc':'Desde cualquier banco','fast-easy':'Rápido y cómodo',fq1:'¿Qué incluye el plan gratis?',fq2:'¿Diferencia entre paquete y suscripción?',fq3:'¿Cómo pagar?',fq4:'¿Por qué CryptoBot es más barato?',fq5:'¿Puedo obtener reembolso?',fa1:'5 solicitudes diarias a Claude AI. Todas las funciones disponibles.',fa2:'Paquete — cantidad fija sin vencimiento. Suscripción — límite diario por período.',fa3:'Tres formas: CryptoBot, Telegram Stars, transferencia bancaria.',fa4:'Comisión de CryptoBot solo 1%. Stars — Apple y Google cobran 30%.',fa5:'Si no usó ninguna solicitud — sí. Después del uso, no hay reembolso.',footer:'Broks AI</a> — asistente IA de nueva generación',l50:'200 solicitudes',l100:'250 solicitudes',l300:'300 solicitudes',l1000:'1000 solicitudes',lweek:'Semana',lmonth:'Mes',l3month:'3 meses',lyear:'Año','cat-pkg':'Paquetes','cat-sub':'Suscripciones','cat-unl':'Ilimitado','fun-label':'Dato curioso','fun-text':'Este sitio web fue creado completamente por el bot Broks AI — desde el diseño y el código hasta la integración de pagos. Ni una sola línea fue escrita por un humano. Así funciona la automatización con IA del futuro.'},
-    ar:{chip:'يعمل بـ Claude Sonnet',h1a:'استثمر في ',h1b:'الذكاء الاصطناعي',sub:'ثلاثة أنواع خطط. ثلاث طرق دفع. ابدأ مجاناً','tab-pkg':'الباقات','tab-sub':'الاشتراكات','tab-unl':'غير محدود',start:'لايت',optimal:'الأمثل',pro:'احترافي',week:'أسبوع',month:'شهر',year:'سنة','unl-week':'غير محدود أسبوع','unl-month':'غير محدود شهر','unl-year':'غير محدود سنة',d50:'200 طلب Claude AI',d300:'250 طلب Claude AI',d1000:'1000 طلب Claude AI',d50w:'50/يوم، 7 أيام',d50m:'50/يوم، 30 يوم',d100y:'100/يوم، 365 يوم',du7:'غير محدود، 7 أيام',du30:'غير محدود، 30 يوم',du365:'غير محدود، 365 يوم',f50:'200 Claude Create',f300:'250 Claude Create',f1000:'1000 Claude Create',f50d:'50 يومياً',f100d:'100 يومياً',forever:'بدون انتهاء',allf:'جميع الميزات',unlimited:'غير محدود',priority:'أولوية الوصول',d7:'7 أيام',d30:'30 يوم',d365:'365 يوم',buy:'شراء',connect:'اشتراك',popular:'شائع',profitable:'أفضل قيمة',maximum:'الأقصى',save34:'أفضل لكل طلب',save48:'وفر 48%',cheap29:'أرخص 29%',save72:'وفر 72%',cheap57:'أرخص 57%',save86:'وفر 86%',compare:'قارن طرق الدفع','faq-title':'الأسئلة الشائعة','best-price':'أفضل الأسعار','fast-pay':'دفع سريع','in-tg':'مباشرة في تيليجرام','crypto-desc':'عملات رقمية ودفع سريع','bank-desc':'من أي بنك','fast-easy':'سريع ومريح',fq1:'ماذا يتضمن الخطة المجانية؟',fq2:'ما الفرق بين الباقة والاشتراك؟',fq3:'كيف أدفع؟',fq4:'لماذا CryptoBot أرخص؟',fq5:'هل يمكنني استرداد الأموال؟',fa1:'5 طلبات Claude AI يومياً. جميع الميزات متاحة.',fa2:'الباقة — عدد ثابت بدون انتهاء. الاشتراك — حد يومي لفترة محددة.',fa3:'ثلاث طرق: CryptoBot، Telegram Stars، تحويل بنكي.',fa4:'عمولة CryptoBot فقط 1%. Stars — أبل وجوجل يأخذون 30%.',fa5:'إذا لم تستخدم أي طلب — نعم. بعد الاستخدام لا يمكن الاسترداد.',footer:'Broks AI</a> — مساعد ذكاء اصطناعي من الجيل الجديد',l50:'200 طلب',l100:'250 طلب',l300:'300 طلب',l1000:'1000 طلب',lweek:'أسبوع',lmonth:'شهر',l3month:'3 أشهر',lyear:'سنة','cat-pkg':'الباقات','cat-sub':'الاشتراكات','cat-unl':'غير محدود','fun-label':'حقيقة مثيرة','fun-text':'هذا الموقع تم إنشاؤه بالكامل بواسطة بوت Broks AI — من التصميم والكود إلى ربط أنظمة الدفع. لم يُكتب سطر واحد بواسطة إنسان. هكذا تعمل أتمتة الذكاء الاصطناعي في المستقبل.'}
+    ru:{'pay-crypto':'Крипто 350+','pay-sbp':'Рубли СБП','cr-title':'Крипто 350+','crypto-desc':'BTC, ETH, USDT и 350+ монет',chip:'Работает на Claude Sonnet',h1a:'Инвестируй в ',h1b:'свой AI',sub:'Три типа тарифов. Три способа оплаты. Начни бесплатно — масштабируй когда готов','tab-pkg':'Пакеты','tab-sub':'Подписки','tab-unl':'Безлимит',start:'Лайт',optimal:'Оптимальный',pro:'Про',week:'Неделя',month:'Месяц',year:'Год','unl-week':'Безлимит неделя','unl-month':'Безлимит месяц','unl-year':'Безлимит год',d50:'200 запросов к Claude AI',d300:'300 запросов к Claude AI',d1000:'1000 запросов к Claude AI',d50w:'50 запросов/день, 7 дней',d50m:'50 запросов/день, 30 дней',d100y:'100 запросов/день, 365 дней',du7:'Без ограничений, 7 дней',du30:'Без ограничений, 30 дней',du365:'Без ограничений, 365 дней',f50:'200 Claude Create',f300:'300 Claude Create',f1000:'1000 Claude Create',f50d:'50 в день',f100d:'100 в день',forever:'Бессрочно',allf:'Все функции',unlimited:'Безлимитно',priority:'Приоритет',d7:'7 дней',d30:'30 дней',d365:'365 дней',buy:'Купить',connect:'Подключить',popular:'Популярный',profitable:'Выгодный',maximum:'Максимум',save34:'Выгоднее за запрос',save48:'Экономия 48%',cheap29:'Дешевле на 29%',save72:'Экономия 72%',cheap57:'Дешевле на 57%',save86:'Экономия 86%',compare:'Сравни способы оплаты','faq-title':'Частые вопросы','best-price':'Лучшие цены','fast-pay':'Быстрая оплата','in-tg':'Прямо в Telegram','bank-desc':'Оплата с любого банка','fast-easy':'Быстро и удобно',fq1:'Что входит в бесплатный план?',fq2:'Чем пакет отличается от подписки?',fq3:'Как оплатить?',fq4:'Почему через крипту дешевле?',fq5:'Можно вернуть деньги?',fa1:'5 запросов к Claude AI каждый день. Все функции доступны.',fa2:'Пакет — фиксированное количество запросов без срока. Подписка — лимит запросов каждый день на период.',fa3:'Три способа: криптовалюта (350+ монет, самые низкие цены), Telegram Stars (удобно), рубли через СБП.',fa4:'Комиссия крипты всего 0.5%. У Stars — 30% забирают Apple и Google.',fa5:'Если не использовали запросы — да, @naebase. После использования нет.','fun-label':'Интересный факт','fun-text':'Этот сайт полностью создан ботом Broks AI — от дизайна и кода до подключения платёжных систем.',l50:'200 запросов',l100:'250 запросов',l300:'300 запросов',l1000:'1000 запросов',lweek:'Неделя',lmonth:'Месяц',l3month:'3 месяца',lyear:'Год','cat-pkg':'Пакеты','cat-sub':'Подписки','cat-unl':'Безлимит'},
+    en:{'pay-crypto':'Crypto 350+','pay-sbp':'Bank RUB','cr-title':'Crypto 350+','crypto-desc':'BTC, ETH, USDT & 350+ coins',chip:'Powered by Claude Sonnet',h1a:'Invest in ',h1b:'your AI',sub:'Three plan types. Three payment methods. Start free — scale when ready','tab-pkg':'Packages','tab-sub':'Subscriptions','tab-unl':'Unlimited',start:'Lite',optimal:'Optimal',pro:'Pro',week:'Weekly',month:'Monthly',year:'Yearly','unl-week':'Unlimited week','unl-month':'Unlimited month','unl-year':'Unlimited year',d50:'200 requests to Claude AI',d300:'300 requests to Claude AI',d1000:'1000 requests to Claude AI',d50w:'50/day, 7 days',d50m:'50/day, 30 days',d100y:'100/day, 365 days',du7:'Unlimited, 7 days',du30:'Unlimited, 30 days',du365:'Unlimited, 365 days',f50:'200 Claude Create',f300:'300 Claude Create',f1000:'1000 Claude Create',f50d:'50 per day',f100d:'100 per day',forever:'No expiration',allf:'All features',unlimited:'Unlimited',priority:'Priority',d7:'7 days',d30:'30 days',d365:'365 days',buy:'Buy',connect:'Subscribe',popular:'Popular',profitable:'Best value',maximum:'Maximum',save34:'Better per request',save48:'Save 48%',cheap29:'29% cheaper',save72:'Save 72%',cheap57:'57% cheaper',save86:'Save 86%',compare:'Compare payment methods','faq-title':'FAQ','best-price':'Best prices','fast-pay':'Fast payment','in-tg':'In Telegram','bank-desc':'Any bank','fast-easy':'Fast & easy',fq1:'What\'s in the free plan?',fq2:'Package vs subscription?',fq3:'How to pay?',fq4:'Why is crypto cheaper?',fq5:'Refunds?',fa1:'5 Claude AI requests daily. All features included.',fa2:'Package — fixed requests, no expiry. Subscription — daily limit for a period.',fa3:'Three ways: crypto (350+ coins, lowest fees), Telegram Stars, bank transfer.',fa4:'Crypto fee is only 0.5%. Stars — Apple & Google take 30%.',fa5:'If unused — yes, contact @naebase. After use — no.','fun-label':'Fun fact','fun-text':'This site was entirely built by Broks AI bot — from design to payment integration.',l50:'200 requests',l100:'250 requests',l300:'300 requests',l1000:'1000 requests',lweek:'Week',lmonth:'Month',l3month:'3 months',lyear:'Year','cat-pkg':'Packages','cat-sub':'Subscriptions','cat-unl':'Unlimited'}
   };
 
   document.getElementById('langSel').addEventListener('change',function(){
-    var lang=this.value;
-    var dict=L[lang]||L.ru;
+    var lang=this.value,dict=L[lang]||L.ru;
     var els=document.querySelectorAll('[data-t]');
-    for(var i=0;i<els.length;i++){
-      var key=els[i].getAttribute('data-t');
-      if(dict[key]!==undefined){
-        if(key==='footer'){els[i].innerHTML=dict[key];}
-        else{els[i].textContent=dict[key];}
-      }
-    }
+    for(var i=0;i<els.length;i++){var key=els[i].getAttribute('data-t');if(dict[key]!==undefined){if(key==='footer')els[i].innerHTML=dict[key];else els[i].textContent=dict[key];}}
     document.documentElement.dir=(lang==='ar')?'rtl':'ltr';
   });
 
-
-// Telegram WebApp - полная блокировка сворачивания
-if(window.Telegram && window.Telegram.WebApp){
-  var tg=window.Telegram.WebApp;
-  tg.expand();
-  tg.ready();
-  try{tg.disableVerticalSwipes();}catch(e){}
-  
-}
-
-
-
-// Оплата CryptoBot прямо внутри Mini App через web_app_invoice_url
-var API='https://things-therapeutic-adware-respective.trycloudflare.com';
-var tgUser=0;
-if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initDataUnsafe&&window.Telegram.WebApp.initDataUnsafe.user){
-  tgUser=window.Telegram.WebApp.initDataUnsafe.user.id;
-}
-document.addEventListener('click',function(e){
-  var a=e.target.closest('a.btn');
-  if(!a)return;
-  var href=a.getAttribute('href')||'';
-  if(href.indexOf('start=pay_')<0)return;
-  e.preventDefault();
-  // Только CryptoBot через API
-  if(currentPay!=='crypto'){
-    window.location.href=href;
-    return;
-  }
-  var m=href.match(/start=pay_(.+)/);
-  if(!m)return;
-  var tid=m[1];
-  var oldText=a.textContent;
-  a.textContent='Создаю счёт...';
-  a.style.opacity='0.6';
-  a.style.pointerEvents='none';
-  fetch(API+'/create-invoice?tariff_id='+tid+'&user_id='+tgUser,{method:'POST'})
-    .then(function(r){return r.json()})
-    .then(function(d){
-      if(d.ok&&d.web_app_url){
-        // Перенаправляем на страницу оплаты CryptoBot прямо в Mini App
-        window.location.href=d.web_app_url;
-      }else{
-        window.location.href=href;
-      }
-    })
-    .catch(function(){
-      window.location.href=href;
-    })
-    .finally(function(){
-      a.textContent=oldText;
-      a.style.opacity='1';
-      a.style.pointerEvents='auto';
-    });
-});
-
 })();
 </script>
-
 </div>
 </body>
 </html>
