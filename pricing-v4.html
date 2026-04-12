@@ -297,7 +297,7 @@ footer a{color:var(--v2);text-decoration:none;font-weight:500}
   }
 
   // Buy buttons
-  document.addEventListener('click',function(e){var btn=e.target.closest('button.btn[data-tariff]');if(!btn)return;e.preventDefault();var tariff=btn.getAttribute('data-tariff'),name=btn.closest('.card').querySelector('.c-name').textContent;if(currentPay==='crypto'){openCryptoModal(tariff,name);return;}var link='https://t.me/NBroks_bot?start=pay_'+tariff;if(window.Telegram&&window.Telegram.WebApp){try{window.Telegram.WebApp.openTelegramLink(link);}catch(err){window.open(link,'_blank');}}else window.open(link,'_blank');});
+  document.addEventListener('click',function(e){var btn=e.target.closest('button.btn[data-tariff]');if(!btn)return;e.preventDefault();var tariff=btn.getAttribute('data-tariff'),name=btn.closest('.card').querySelector('.c-name').textContent;if(currentPay==='crypto'){openCryptoModal(tariff,name);return;}var prefix=currentPay==='stars'?'stars_':'pay_';var link='https://t.me/NBroks_bot?start='+prefix+tariff;if(window.Telegram&&window.Telegram.WebApp){try{window.Telegram.WebApp.openTelegramLink(link);}catch(err){window.open(link,'_blank');}}else window.open(link,'_blank');});
 
   // Crypto modal
   var selectedCoin='usdttrc20',currentTariff='',pollTimer=null;
