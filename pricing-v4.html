@@ -301,7 +301,7 @@ footer a{color:var(--v2);text-decoration:none;font-weight:500}
 
   // Crypto modal
   var selectedCoin='usdttrc20',currentTariff='',pollTimer=null;
-  function openCryptoModal(t,n){currentTariff=t;document.getElementById('pmTariffName').textContent=n;document.getElementById('pmStep1').style.display='';document.getElementById('pmStep2').style.display='none';document.getElementById('pmStep3').style.display='none';document.getElementById('payOverlay').classList.add('active');}
+  window.openCryptoModal=function(t,n){currentTariff=t;document.getElementById('pmTariffName').textContent=n;document.getElementById('pmStep1').style.display='';document.getElementById('pmStep2').style.display='none';document.getElementById('pmStep3').style.display='none';document.getElementById('payOverlay').classList.add('active');}
   document.getElementById('pmClose').addEventListener('click',closeModal);document.getElementById('payOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
   function closeModal(){document.getElementById('payOverlay').classList.remove('active');if(pollTimer)clearInterval(pollTimer);pollTimer=null;}
   document.getElementById('coinGrid').addEventListener('click',function(e){var btn=e.target.closest('.coin-btn');if(!btn)return;var all=this.querySelectorAll('.coin-btn');for(var i=0;i<all.length;i++)all[i].classList.remove('coin-on');btn.classList.add('coin-on');selectedCoin=btn.getAttribute('data-coin');});
